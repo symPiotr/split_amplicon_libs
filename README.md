@@ -15,13 +15,12 @@ Unix environment, Python 3
 split_amplicon_libs.py <list_of_targets> <list_of_libraries> <output_dir>
 e.g., 
 split_amplicon_libs.py /mnt/matrix/symbio/db/references/standard_primers.txt sample_list.txt ~/test_data
-```  
-&nbsp;  
+```    
   
 The required file **target_list.txt** contains target IDs and primer sequences. Any non-commented-out lines in the script should go as follows:   
 **TARGET_NAME <tab> FORWARD_PRIMER_SEQ <tab> REVERSE_PRIMER_SEQ**   
 Ambiguous bases within the primer sequences are allowed: they will be converted into search terms following IUPAC codes.  
-Note that the script allows the primer sequences within reads to be preceded by up to four bases (any sequence), corresponding to variable length inserts used as a part of the Symbiosis Evolution Group workflow. However, the script does not currently allow any mismatches between the provided primers and the reads.  
+Note that the script allows the primer sequences within reads to be preceded by up to four bases (any sequence), corresponding to variable length inserts used as a part of the Symbiosis Evolution Group workflow. However, the script does not currently allow for any mismatches between the provided primers and the reads.  
 ```
 piotr.lukasik@fsm:~/scripts$ cat /mnt/matrix/symbio/db/references/standard_primers.txt
 ##region_name	#R1_primer_sequence	#R2_primer_sequence
@@ -32,7 +31,6 @@ ITS2  GTGARTCATCGAATCTTTG  CCTCCGCTTATTGATATGC
 ITS1a  TGGTCATTTAGAGGAAGTAA  GCGTTCTTCATCGAT
 ```  
 &nbsp;  
-  
 The required file **sample_list.txt** contains library IDs and file names, where any non-commented-out lines should be organized as follows:  
 **SAMPLE_NAME <tab>  R1_FILE_NAME.fastq <tab> R1_FILE_NAME.fastq**  
 Note that the files need to be uncompressed --- fastq.gz would not do!  
