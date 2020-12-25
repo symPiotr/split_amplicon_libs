@@ -43,17 +43,15 @@ A_CALBON1	A-CALBON1_S244_L001_R1_001.fastq	A-CALBON1_S244_L001_R2_001.fastq
 A_CALBON2	A-CALBON2_S245_L001_R1_001.fastq	A-CALBON2_S245_L001_R2_001.fastq
 ...
 ```  
-How to create such sample list? You can use Excel or anything else. But if your samples have the names as those above, a convenient way would be a Unix pipe:  
+How to create such sample list? You can use Excel or whatever you please, of course. But if your samples have the names as above, a convenient way could be a Unix pipe:  
 ```
 for file in *_R1_001.fastq; do
-    SampleName=`basename $file _L001_R1_001.fastq`
-    echo "$SampleName $SampleName"_L001_R1_001.fastq "$SampleName"_L001_R2_001.fastq >> sample_names.txt
+    SampleName=`basename $file _L001_R1_001.fastq `
+    SampleNameMod=$(echo "$SampleName" | sed 's/-/_/g' | sed 's/_S[0-9]\+$//g')
+    echo $SampleNameMod "$SampleName"_L001_R1_001.fastq "$SampleName"_L001_R2_001.fastq >> sample_list.txt
 done
-sed 's/
-
-
+```  
+  
 &nbsp;  
-...and output_dir is wherever you want your post-splitting files created.
 
-
-
+The output_dir is wherever you want to move your post-splitting files!
