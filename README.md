@@ -1,10 +1,13 @@
 # split_amplicon_libs.py
 Script [split_amplicon_libs.py](split_amplicon_libs.py) splits Illumina amplicon datasets (paired FASTQ files, un-gzipped) into files corresponding to different amplification targets, checking for primer sequences within the initial portions of R1 and R2 reads. Check [https://github.com/symPiotr/amplicon_analysis_pipeline](https://github.com/symPiotr/amplicon_analysis_pipeline) for info on the organization of multi-target libraries prepared according to the Symbiosis Evolution Group protocols, that are likely to be the main source of data for this script!
 &nbsp;    
+  
 The script reads in the list of amplification targets and the list of sample and fastq file names. In each of the samples, in each pairs of reads, the script then searchers for primer sequences corresponding to each target within the initial portions of the R1 and R2 reads. It assign the read pair to a given target in the case of a match. It allows the primer sequences to be preceded by up to four additional bases (corresponding to our variable length inserts) but it does not currently allow for any mismatches within the primer sequences.  
-&nbsp;
-The script then outputs reads corresponding to each of the targets into files "TARGET/TARGET_SAMPLE_R1.fastq" and "TARGET/TARGET_SAMPLE_R2.fastq" within the working directory. Finally, it prints the splitting summary (for each sample, the number of reads assigned to each of the targets, as well as those Unclassified) to a file **000_splitting_summary.txt** within the working directory.
-
+&nbsp;  
+  
+The script then outputs reads corresponding to each of the targets into files "TARGET/TARGET_SAMPLE_R1.fastq" and "TARGET/TARGET_SAMPLE_R2.fastq" within the working directory. Finally, it prints the splitting summary (for each sample, the number of reads assigned to each of the targets, as well as those Unclassified) to a file **000_splitting_summary.txt** within the working directory.  
+&nbsp  
+  
 ### Requirements: 
 Unix environment, Python 3
 
