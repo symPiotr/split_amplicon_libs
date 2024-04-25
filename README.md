@@ -1,5 +1,8 @@
 # split_amplicon_libs.py
-Script [split_amplicon_libs.py](split_amplicon_libs.py) splits Illumina amplicon datasets (paired FASTQ files, un-gzipped) into files corresponding to different amplification targets, checking for primer sequences within the initial portions of R1 and R2 reads. Check [https://github.com/symPiotr/amplicon_analysis_pipeline](https://github.com/symPiotr/amplicon_analysis_pipeline) for info on the organization of multi-target libraries prepared according to the Symbiosis Evolution Group protocols, that are likely to be the main source of data for this script!
+Script [split_amplicon_libs.py](split_amplicon_libs.py) splits Illumina amplicon datasets (paired FASTQ files, **un-gzipped**) into files corresponding to different amplification targets, checking for primer sequences within the initial portions of R1 and R2 reads.   
+A version of the script, [split_gzipped_amplicon_libs.py](split_gzipped_amplicon_libs.py) does the same, except that it inputs and outputs gzipped files.  
+  
+Check [https://github.com/symPiotr/amplicon_analysis_pipeline](https://github.com/symPiotr/amplicon_analysis_pipeline) for info on the organization of multi-target libraries prepared according to the Symbiosis Evolution Group protocols, that are likely to be the main source of data for this script!
 &nbsp;    
   
 The script reads in the list of amplification targets and the list of sample and fastq file names. In each of the samples, in each pairs of reads, the script then searchers for primer sequences corresponding to each target within the initial portions of the R1 and R2 reads. It assign the read pair to a given target in the case of a match. It allows the primer sequences to be preceded by up to four additional bases (corresponding to our variable length inserts) but it does not currently allow for any mismatches within the primer sequences.  
@@ -16,7 +19,13 @@ Unix environment, Python 3
 split_amplicon_libs.py <list_of_targets> <list_of_libraries> <output_dir>
 e.g., 
 split_amplicon_libs.py /mnt/matrix/symbio/db/references/standard_primers.txt sample_list.txt ~/test_data
-```    
+```
+OR
+```
+split_gzipped_amplicon_libs.py <list_of_targets> <list_of_libraries> <output_dir>
+e.g., 
+split_gzipped_amplicon_libs.py ~/references/standard_primers.txt sample_list.txt ~/test_data
+```
   
 The required file **target_list.txt** contains target IDs and primer sequences. Any non-commented-out lines in the script should go as follows:   
 **TARGET_NAME <tab> FORWARD_PRIMER_SEQ <tab> REVERSE_PRIMER_SEQ**   
@@ -44,10 +53,11 @@ A_CALBON2	A-CALBON2_S245_L001_R1_001.fastq	A-CALBON2_S245_L001_R2_001.fastq
 ```  
 How to create such sample list? You can use Excel or whatever you please, of course. But if your samples have the names as above, a convenient way could be a Unix pipe:  
 ```
-for file in *_R1_001.fastq; do
-    SampleName=`basename $file _L001_R1_001.fastq `
+### assuming that your input files are in the directory where you execute the script, and have name format SampleName_R1.fq.gz, SampleName_R2.fq.gz:
+for file in *_R1.fq.gz; do
+    SampleName=`basename $file _R1.fq.gz `
     SampleNameMod=$(echo "$SampleName" | sed 's/-/_/g' | sed 's/_S[0-9]\+$//g')
-    echo $SampleNameMod "$SampleName"_L001_R1_001.fastq "$SampleName"_L001_R2_001.fastq >> sample_list.txt
+    echo $SampleNameMod "$SampleName"_R1.fq.gz "$SampleName"_R2.fq.gz >> sample_list.txt
 done
 ```  
   
