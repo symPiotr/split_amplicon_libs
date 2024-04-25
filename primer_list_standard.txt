@@ -1,0 +1,12 @@
+#### This is the list of our primers used in amplicon seq assays by the Symbiosis Evolution Group.
+#### Please hash out those that you have not used in your experiment!
+
+##region_name   #R1_primer_sequence     #R2_primer_sequence
+
+#### Standard primers
+COI_BF3HYMBR2      CCHGAYATRKCHTWYCCHCG    TCDGGRTGNCCRAARAAYCA
+16S_V4  GTGYCAGCMGCCGCGGTAA     GGACTACNVGGGTWTCTAAT
+16S_V1V2  AGMGTTYGATYMTGGCTCAG  TGCTGCCTCCCGTAGGAGT
+ITS2  GTGARTCATCGAATCTTTG  CCTCCGCTTATTGATATGC
+ITS1a  TGGTCATTTAGAGGAAGTAA  GCGTTCTTCATCGAT
+nu_SSU	CGATAACGAACGAGACCT	ANCCATTCAATCGGTANT
